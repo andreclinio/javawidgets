@@ -12,7 +12,6 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
-import java.util.Vector;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -98,12 +97,12 @@ public class JDegradee extends JPanel {
   /**
    * Adaptadores de eventos de mouse.
    */
-  final private Vector<JDegradeeAdapter> adapters = new Vector<JDegradeeAdapter>();
+  final private ArrayList<JDegradeeAdapter> adapters = new ArrayList<>();
 
   /**
    * Texto a ser desenhado
    */
-  private ArrayList<JDegradeeRenderer> textBuilders = new ArrayList<JDegradeeRenderer>();
+  final private ArrayList<JDegradeeRenderer> textBuilders = new ArrayList<>();
 
   /**
    * Consulta o número de itens.
@@ -525,7 +524,7 @@ public class JDegradee extends JPanel {
    * @param factor o fator (0.0 até 1.0)
    * @return um array de cores.
    */
-  final private Color getGradientColor(final Color primary, final Color secondary, final double factor) {
+  final static private Color getGradientColor(final Color primary, final Color secondary, final double factor) {
     final int r1 = primary.getRed();
     final int g1 = primary.getGreen();
     final int b1 = primary.getBlue();
