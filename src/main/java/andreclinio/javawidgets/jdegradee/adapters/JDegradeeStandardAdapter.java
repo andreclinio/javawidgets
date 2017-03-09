@@ -14,7 +14,7 @@ import andreclinio.javawidgets.jdegradee.JDegradee;
 /**
  * Tratador padrão de mouse.
  *
- * @author Tecgraf/PUC-Rio
+ * @author André Clinio
  */
 public class JDegradeeStandardAdapter extends JDegradeeAdapter {
 
@@ -36,7 +36,7 @@ public class JDegradeeStandardAdapter extends JDegradeeAdapter {
    *
    * @return uma cor (ou <code>null</code> em caso de desistência)
    */
-  final private Color chooseColor(final JDegradee jDegradee, final Color color) {
+  final private static Color chooseColor(final JDegradee jDegradee, final Color color) {
     return JColorChooser.showDialog(jDegradee, "", color);
   }
 
@@ -47,7 +47,7 @@ public class JDegradeeStandardAdapter extends JDegradeeAdapter {
    * @param event evento Java
    * @return o índice válido ou -1
    */
-  final protected int getMarkIndexOnEvent(final JDegradee jDegradee, final MouseEvent event) {
+  final protected static int getMarkIndexOnEvent(final JDegradee jDegradee, final MouseEvent event) {
     final int numItems = jDegradee.getNumItems();
     for (int idx = 0; idx < numItems; idx++) {
       if (jDegradee.hasMarkColor(idx)) {

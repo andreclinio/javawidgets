@@ -13,38 +13,40 @@ import andreclinio.javawidgets.jdegradee.adapters.JDegradeeStandardAdapter;
 import andreclinio.javawidgets.jdegradee.renderers.JDegradeeRenderer;
 
 /**
+ * Simple panel with de {@link JDegradee} with two limits buttons.
+ *
  * @author André Clinio
  */
 public class JDegradeePanel extends JPanel {
 
   /**
-   * Botão de seleção de cor primária
+   * Primary color button
    */
   final private JButton priButton = new JButton();
 
   /**
-   * Botão de seleçÃo de cor secundária
+   * Secondary color button
    */
   final private JButton secButton = new JButton();
 
   /**
-   * Painel de degradee
+   * Panel
    */
   final private JDegradee jDegradee = new JDegradee();
 
   /**
-   * Escolha de uma cor
+   * Simple color chooser
    *
-   * @param color a cor antiga já selecionada
+   * @param color old selected color
    *
-   * @return uma cor (ou <code>null</code> em caso de desistência)
+   * @return new color or <code>null</code> (for cancel operation)
    */
   final private Color chooseColor(final Color color) {
     return JColorChooser.showDialog(jDegradee, "", color);
   }
 
   /**
-   * Ajusta o layout do botão primário
+   * Button layout
    */
   final private void adjustPrimaryButton() {
     final Color priColor = jDegradee.getPrimaryColor();
@@ -61,7 +63,7 @@ public class JDegradeePanel extends JPanel {
   }
 
   /**
-   * Ajusta o layout do botão secundário
+   * Button layout
    */
   final private void adjustSecondaryButton() {
     final Color secColor = jDegradee.getSecondaryColor();
@@ -78,9 +80,9 @@ public class JDegradeePanel extends JPanel {
   }
 
   /**
-   * Ajuste da cor primária
+   * Set primary color
    *
-   * @param color a cor
+   * @param color color
    */
   final public void setPrimaryColor(final Color color) {
     jDegradee.setPrimaryColor(color);
@@ -88,9 +90,9 @@ public class JDegradeePanel extends JPanel {
   }
 
   /**
-   * Ajuste da cor primária
+   * Set secondary color
    *
-   * @param color a cor
+   * @param color color
    */
   final public void setSecondaryColor(final Color color) {
     jDegradee.setSecondaryColor(color);
@@ -98,50 +100,50 @@ public class JDegradeePanel extends JPanel {
   }
 
   /**
-   * Ajuste de listener de mouse
+   * Adjustment of mouse adapter
    */
   final private void setMouseAdapter() {
     jDegradee.addDegradeeListener(new JDegradeeStandardAdapter("ED", "DEL"));
   }
 
   /**
-   * Ajusta o text builder do elemento.
+   * Adjustement of item renderer
    *
-   * @param renderer o builder
+   * @param renderer renderer
    */
   final public void addItemRenderer(final JDegradeeRenderer renderer) {
     jDegradee.addItemRenderer(renderer);
   }
 
   /**
-   * Ajusta o text builder do elemento.
+   * Removal of item renderer
    *
-   * @param renderer o builder
+   * @param renderer renderer
    */
   final public void delItemRenderer(final JDegradeeRenderer renderer) {
     jDegradee.delItemRenderer(renderer);
   }
 
   /**
-   * Limpa todos os text builders do elemento.
+   * Complete removal of item renderers
    */
   final public void clearItemRenderer() {
     jDegradee.clearRenderer();
   }
 
   /**
-   * Consulta a orientação do elemento degradeé interno
+   * Orientation getter
    *
-   * @return a orientação
+   * @return orientation
    */
   final public JDegradee.Orientation getOrientation() {
     return jDegradee.getOrientation();
   }
 
   /**
-   * Ajuste de orientação.
+   * Orientation setter
    *
-   * @param orientation orientação
+   * @param orientation orinetation
    */
   final public void setOrientation(final JDegradee.Orientation orientation) {
     jDegradee.setOrientation(orientation);
@@ -162,7 +164,7 @@ public class JDegradeePanel extends JPanel {
   }
 
   /**
-   * Construtor padrão.
+   * Constructor
    */
   public JDegradeePanel() {
     setLayout(new BorderLayout());
@@ -175,5 +177,4 @@ public class JDegradeePanel extends JPanel {
     add(jDegradee, BorderLayout.CENTER);
     setOrientation(JDegradee.Orientation.VERTICAL);
   }
-
 }
