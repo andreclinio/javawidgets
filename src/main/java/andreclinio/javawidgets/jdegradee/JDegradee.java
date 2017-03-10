@@ -8,8 +8,6 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
@@ -41,7 +39,7 @@ public class JDegradee extends JPanel {
     /**
      * Vertical
      */
-    VERTICAL;
+    VERTICAL
   }
 
   /**
@@ -223,7 +221,7 @@ public class JDegradee extends JPanel {
    * @param index o índice do elemento
    * @return um retângulo com a área útil do item.
    */
-  final private Rectangle2D getBounds(final int index) {
+  private Rectangle2D getBounds(final int index) {
     final Rectangle2D rect = new Rectangle2D.Double();
     final double width = getWidth();
     final double height = getHeight();
@@ -373,7 +371,7 @@ public class JDegradee extends JPanel {
    * @param index o índice a ser checado
    * @return um indicativo
    */
-  final private boolean isValidIndex(final int index) {
+  private boolean isValidIndex(final int index) {
     return index >= 0 && index < numItems;
   }
 
@@ -448,12 +446,9 @@ public class JDegradee extends JPanel {
    */
   private void addMouseWheelAdapter() {
     final JDegradee self = this;
-    addMouseWheelListener(new MouseWheelListener() {
-      @Override
-      public void mouseWheelMoved(final MouseWheelEvent event) {
-        for (JDegradeeAdapter adapter : adapters) {
-          adapter.mouseExited(self, event);
-        }
+    addMouseWheelListener(event -> {
+      for (JDegradeeAdapter adapter : adapters) {
+        adapter.mouseWheelMoved(self, event);
       }
     });
   }
@@ -498,7 +493,7 @@ public class JDegradee extends JPanel {
   /**
    * Realocação internal do array de marcas de cores
    */
-  final private void reallocMarks() {
+  private void reallocMarks() {
     final Color[] array = new Color[numItems];
     if (markColor == null) {
       markColor = array;
@@ -524,7 +519,7 @@ public class JDegradee extends JPanel {
    * @param factor o fator (0.0 até 1.0)
    * @return um array de cores.
    */
-  final static private Color getGradientColor(final Color primary, final Color secondary, final double factor) {
+  static private Color getGradientColor(final Color primary, final Color secondary, final double factor) {
     final int r1 = primary.getRed();
     final int g1 = primary.getGreen();
     final int b1 = primary.getBlue();
