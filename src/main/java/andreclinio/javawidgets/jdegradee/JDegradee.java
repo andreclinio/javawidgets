@@ -218,7 +218,7 @@ public class JDegradee extends JPanel {
   /**
    * Calcula a área retângular de um item
    *
-   * @param index o índice do elemento
+   * @param index index
    * @return um retângulo com a área útil do item.
    */
   private Rectangle2D getBounds(final int index) {
