@@ -1,8 +1,6 @@
 package andreclinio.javawidgets.jdegradee;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
@@ -11,24 +9,22 @@ import java.awt.event.MouseMotionListener;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.WindowConstants;
 
 import andreclinio.javawidgets.jdegradee.adapters.JDegradeeAdapter;
 import andreclinio.javawidgets.jdegradee.renderers.JDegradeeRenderer;
 
 /**
- * Elemento de visualização de degradeé
+ * Degradeé widget
  *
  * @author André Clinio
  */
 public class JDegradee extends JPanel {
 
   /**
-   * Layout de um objeto <code>JDegradee</code>
+   * Layout for widget <code>JDegradee</code>
    *
-   * @author Tecgraf/PUC-Rio
+   * @author André Clinio
    */
   public enum Orientation {
     /**
@@ -43,57 +39,57 @@ public class JDegradee extends JPanel {
   }
 
   /**
-   * Layout corrente
+   * Current layout
    */
   private Orientation orientation = Orientation.VERTICAL;
 
   /**
-   * Cor das linhas (grid).
+   * Line color
    */
   private Color lineColor = Color.black;
 
   /**
-   * Cor primária
+   * Primary color
    */
   private Color priColor = Color.red;
 
   /**
-   * Cor secundária
+   * Secondary color
    */
   private Color secColor = Color.blue;
 
   /**
-   * Array de marcas de cores
+   * Markers' colors
    */
   private Color[] markColor;
 
   /**
-   * Número de itens (discretização do painel)
+   * number of itens (discret inside panel)
    */
   private int numItems;
 
   /**
-   * Indicativo de grid
+   * Grid drawing flag
    */
   private boolean hasGrid = true;
 
   /**
-   * Tamanho da marca (exibição)
+   * Mark size (representation)
    */
   final static public int MARK_SIZE = 10;
 
   /**
-   * Número mínimo de itens possível
+   * Minimum number of itens
    */
   final static public int MIN_ITENS = 2;
 
   /**
-   * Número máximo de itens possível
+   * Maximum number of itens
    */
   final static public int MAX_ITENS = 512;
 
   /**
-   * Adaptadores de eventos de mouse.
+   * Mouse adapaters list
    */
   final private ArrayList<JDegradeeAdapter> adapters = new ArrayList<>();
 
@@ -103,18 +99,18 @@ public class JDegradee extends JPanel {
   final private ArrayList<JDegradeeRenderer> textBuilders = new ArrayList<>();
 
   /**
-   * Consulta o número de itens.
+   * Number of itens
    *
-   * @return o número de itens
+   * @return number of itens
    */
   final public int getNumItems() {
     return numItems;
   }
 
   /**
-   * Ajusta o número de itens (discretização do painel)
+   * Sets the new number of ietns
    *
-   * @param numItens o número de itens
+   * @param numItens number of itens
    */
   final public void setNumItens(final int numItens) {
     if (numItens < MIN_ITENS || numItens > MAX_ITENS) {
@@ -127,10 +123,10 @@ public class JDegradee extends JPanel {
   }
 
   /**
-   * Busca do índice (próximo) que possui uma marca de cor ajustada
+   * Search of next index that has a mark
    *
-   * @param index o índice de busca
-   * @return o índice (ou -1, se não existir)
+   * @param index search index
+   * @return index (or -1 if does not exist)
    */
   private int getNextMarkIndex(final int index) {
     final int last = markColor.length;
@@ -143,10 +139,10 @@ public class JDegradee extends JPanel {
   }
 
   /**
-   * Busca do índice (anterior) que possui uma marca de cor ajustada
+   * Search of previous index that has a mark
    *
-   * @param index o índice de busca
-   * @return o índice (ou -1, se não existir)
+   * @param index search index
+   * @return index (or -1, if does not exist)
    */
   private int getPrevMarkIndex(final int index) {
     for (int i = index; i >= 0; i--) {
@@ -158,10 +154,10 @@ public class JDegradee extends JPanel {
   }
 
   /**
-   * Consulta uma cor ajustada com base em um percentual
+   * Query an adjusted color based on a percentage .
    *
-   * @param ratio o percentual
-   * @return a cor
+   * @param ratio percentage
+   * @return color
    * @see #calculateColorIndex(int)
    */
   final public Color calculateColorRatio(final double ratio) {
@@ -170,11 +166,11 @@ public class JDegradee extends JPanel {
   }
 
   /**
-   * Calcula a cor de um item com base nas marcas e cores (primária e
-   * secundárias)
+   * Calculates the color of an item based on the marks and colors. (primary and
+   * ssecondary)
    *
-   * @param index o índice
-   * @return a cor
+   * @param index index
+   * @return color
    */
   final public Color calculateColorIndex(final int index) {
     if (markColor[index] != null) {
@@ -216,10 +212,10 @@ public class JDegradee extends JPanel {
   }
 
   /**
-   * Calcula a área retângular de um item
+   * Calculates the rectangular area of an item
    *
    * @param index index
-   * @return um retângulo com a área útil do item.
+   * @return rectangle
    */
   private Rectangle2D getBounds(final int index) {
     final Rectangle2D rect = new Rectangle2D.Double();
@@ -241,9 +237,9 @@ public class JDegradee extends JPanel {
   }
 
   /**
-   * Método interno de <i>loop</i> e desenho dos dias.
+   * Internal drawing method (loop)
    *
-   * @param g o contexto gráfico Java.
+   * @param g graphical Java context
    */
   private void drawItems(final Graphics2D g) {
     for (int i = 0; i < numItems; i++) {
@@ -255,35 +251,35 @@ public class JDegradee extends JPanel {
   }
 
   /**
-   * Ajusta o text builder do elemento.
+   * Item renderer addition
    *
-   * @param builder o builder
+   * @param renderer renderer
    */
-  final public void addItemRenderer(final JDegradeeRenderer builder) {
-    textBuilders.add(builder);
+  final public void addItemRenderer(final JDegradeeRenderer renderer) {
+    textBuilders.add(renderer);
   }
 
   /**
-   * Ajusta o text builder do elemento.
+   * Item renderer removal
    *
-   * @param builder o builder
+   * @param renderer renderer
    */
-  final public void delItemRenderer(final JDegradeeRenderer builder) {
-    textBuilders.remove(builder);
+  final public void delItemRenderer(final JDegradeeRenderer renderer) {
+    textBuilders.remove(renderer);
   }
 
   /**
-   * Limpa todos os text builders do elemento.
+   * Item renederers full removal.
    */
   final public void clearRenderer() {
     textBuilders.clear();
   }
 
   /**
-   * Método interno de <i>loop</i> e desenho dos dias.
+   * Internal item draw mthod
    *
-   * @param g2d o contexto gráfico Java.
-   * @param index o índice do elemento
+   * @param g2d Java graphical context
+   * @param index index
    */
   private void drawItem(final Graphics2D g2d, final int index) {
     final Rectangle2D rect = getBounds(index);
@@ -302,10 +298,10 @@ public class JDegradee extends JPanel {
   }
 
   /**
-   * Consulta da região que define uma marca (se houver)
+   * Querying the region that defines a mark (if any)
    *
-   * @param index o índice
-   * @return o retângulo (ou <code>null</code>, se não houver marca na posição)
+   * @param index index
+   * @return rectangle or {@code null}, if there are no marks
    */
   final public Rectangle2D getMarkBounds(final int index) {
     final Color color = getMarkColor(index);
@@ -321,10 +317,10 @@ public class JDegradee extends JPanel {
   }
 
   /**
-   * Método interno de <i>loop</i> e desenho dos dias.
+   * MArk internal drawing method
    *
-   * @param g2d o contexto gráfico Java.
-   * @param index o índice dentro do array de marcas
+   * @param g2d Java graphical context
+   * @param index mark index
    */
   private void drawMark(final Graphics2D g2d, final int index) {
     final Rectangle2D rect = getMarkBounds(index);
@@ -340,20 +336,20 @@ public class JDegradee extends JPanel {
   }
 
   /**
-   * Método de desenho do gráfico.
+   * Full draweing method
    *
-   * @param g2d o contexto gráfico Java.
+   * @param g2d Java graphical context
    */
   private void drawPanel(final Graphics2D g2d) {
     drawItems(g2d);
   }
 
   /**
-   * Pesquisa o índice pertinence a uma coordenada
+   * Search for index belonging to a coordinate
    *
-   * @param x o valor X
-   * @param y o valor Y
-   * @return o índice (ou -1 se não existir)
+   * @param x  X value
+   * @param y  Y value
+   * @return index (or -1 if it does not exist)
    */
   private int getIndex(final double x, final double y) {
     for (int index = 0; index < numItems; index++) {
@@ -366,18 +362,17 @@ public class JDegradee extends JPanel {
   }
 
   /**
-   * Verifica se um índice é válido
+   * Index validation check
    *
-   * @param index o índice a ser checado
-   * @return um indicativo
+   * @param index index
+   * @return flag
    */
   private boolean isValidIndex(final int index) {
     return index >= 0 && index < numItems;
   }
 
   /**
-   * Método interno colocação dos <i>mouse adapter</i> utilizado no painel; este
-   * <i>adapter</i> será responsável por repassar os eventos para a aplicação.
+   * Internal method to use a mouse adapter that resends events to application.
    */
   private void addMouseAdapter() {
     final JDegradee self = this;
@@ -442,7 +437,7 @@ public class JDegradee extends JPanel {
   }
 
   /**
-   * Ajuste do comportamento padrão com a roda do mouse.
+   * Internal method for setting mouse wheel
    */
   private void addMouseWheelAdapter() {
     final JDegradee self = this;
@@ -454,7 +449,7 @@ public class JDegradee extends JPanel {
   }
 
   /**
-   * Ajuste do comportamento padrão com a roda do mouse.
+   * Internal method for setting mouse move
    */
   private void addMouseMoveAdapter() {
     final JDegradee self = this;
@@ -491,7 +486,7 @@ public class JDegradee extends JPanel {
   }
 
   /**
-   * Realocação internal do array de marcas de cores
+   * Internal mark colors reallocation
    */
   private void reallocMarks() {
     final Color[] array = new Color[numItems];
@@ -512,12 +507,12 @@ public class JDegradee extends JPanel {
   }
 
   /**
-   * Montagem de um gradiente de cores.
+   * Mounting a color gradient.
    *
-   * @param primary a cor primária
-   * @param secondary a cor secundária
-   * @param factor o fator (0.0 até 1.0)
-   * @return um array de cores.
+   * @param primary primary color
+   * @param secondary secondary color
+   * @param factor factor (0.0 up to 1.0)
+   * @return color
    */
   static private Color getGradientColor(final Color primary, final Color secondary, final double factor) {
     final int r1 = primary.getRed();
@@ -541,9 +536,9 @@ public class JDegradee extends JPanel {
   }
 
   /**
-   * Desenho do componente.
+   * Componetn drawing
    *
-   * @param g o contexto gráfico Java.
+   * @param g Java graphical context
    */
   @Override
   final public void paintComponent(final Graphics g) {
@@ -552,30 +547,12 @@ public class JDegradee extends JPanel {
   }
 
   /**
-   * Adição de um listener
+   * Listener addition
    *
-   * @param listener o listener
+   * @param listener listener
    */
   final public void addDegradeeListener(final JDegradeeAdapter listener) {
     adapters.add(listener);
-  }
-
-  /**
-   * Consulta a cor de linha do grid (se estiver habilitado)
-   *
-   * @return a cor
-   */
-  final public Color getLineColor() {
-    return lineColor;
-  }
-
-  /**
-   * Ajusta a cor de linha do grid (se estiver habilitado)
-   *
-   * @param lineColor a cor
-   */
-  final public void setLineColor(final Color lineColor) {
-    this.lineColor = lineColor;
   }
 
   /**
@@ -588,17 +565,35 @@ public class JDegradee extends JPanel {
   }
 
   /**
-   * Consulta da exitência de uma cor de marca
+   * Grid line query
    *
-   * @param index o índice
-   * @return o indicativo
+   * @return color
+   */
+  final public Color getLineColor() {
+    return lineColor;
+  }
+
+  /**
+   * Grid line adjustment
+   *
+   * @param color color
+   */
+  final public void setLineColor(final Color color) {
+    this.lineColor = color;
+  }
+
+
+  /**
+   * Check for the existence of a mark color
+   * @param index index
+   * @return flag
    */
   final public boolean hasMarkColor(final int index) {
     return getMarkColor(index) != null;
   }
 
   /**
-   * Consulta de uma cor de marca
+   * Mark color query
    *
    * @param index o índice
    * @return a cor
@@ -608,10 +603,10 @@ public class JDegradee extends JPanel {
   }
 
   /**
-   * Ajuste de cor de marca com base em um índice
+   * Mark color adjustment (based on an index)
    *
-   * @param index o índice
-   * @param color a cor
+   * @param index index
+   * @param color color
    */
   final public void setMarkColorIndex(final int index, final Color color) {
     markColor[index] = color;
@@ -619,10 +614,10 @@ public class JDegradee extends JPanel {
   }
 
   /**
-   * Ajuste de cor de marca com base em um percentual
+   * Mark color adjustment (based on percentage)
    *
-   * @param ratio o percentual
-   * @param color a cor
+   * @param ratio ration
+   * @param color color
    * @see #setMarkColorIndex(int, Color)
    */
   final public void setMarkColorRatio(final double ratio, final Color color) {
@@ -631,27 +626,27 @@ public class JDegradee extends JPanel {
   }
 
   /**
-   * Consulta de cor primária.
+   * Primary color query
    *
-   * @return a cor
+   * @return color
    */
   final public Color getPrimaryColor() {
     return this.priColor;
   }
 
   /**
-   * Consulta de cor secundária.
+   * Secondary color query
    *
-   * @return a cor
+   * @return color
    */
   final public Color getSecondaryColor() {
     return this.secColor;
   }
 
   /**
-   * Ajuste de cor primária
+   * Primary color adjustment
    *
-   * @param color a cor
+   * @param color color
    */
   final public void setPrimaryColor(final Color color) {
     this.priColor = color;
@@ -659,9 +654,9 @@ public class JDegradee extends JPanel {
   }
 
   /**
-   * Ajuste de cor secundária
+   * Secondary color adjustment
    *
-   * @param color a cor
+   * @param color color
    */
   final public void setSecondaryColor(final Color color) {
     this.secColor = color;
@@ -669,9 +664,9 @@ public class JDegradee extends JPanel {
   }
 
   /**
-   * Ajuste de indicativo de desenho de grid.
+   * Grid drawing adjustment
    *
-   * @param flag indicativo
+   * @param flag flag
    */
   final public void setGridActive(final boolean flag) {
     hasGrid = flag;
@@ -679,18 +674,18 @@ public class JDegradee extends JPanel {
   }
 
   /**
-   * Consulta de indicativo de desenho de grid.
+   * Grid drawing query
    *
-   * @return flag indicativo
+   * @return flag
    */
   final public boolean isGridActive() {
     return hasGrid;
   }
 
   /**
-   * Ajuste de orientação.
+   * Orientatiom adjustment
    *
-   * @param orientation orientação
+   * @param orientation orientation
    */
   final public void setOrientation(final Orientation orientation) {
     this.orientation = orientation;
@@ -698,16 +693,16 @@ public class JDegradee extends JPanel {
   }
 
   /**
-   * Consulta de orientação.
+   * Orientation query
    *
-   * @return a orientação
+   * @return orientation
    */
   final public Orientation getOrientation() {
     return this.orientation;
   }
 
   /**
-   * Construtor padrão.
+   * Constructor
    */
   public JDegradee() {
     addMouseAdapter();
@@ -720,27 +715,5 @@ public class JDegradee extends JPanel {
     setSecondaryColor(Color.blue);
     setMarkColorRatio(0.5, Color.yellow);
     // setMarkColorRatio(0.75, Color.white);
-  }
-
-  /**
-   * Método de testes
-   *
-   * @param args <i>não utilizado</i>
-   */
-  static public void main(final String[] args) {
-    final JFrame frame = new JFrame();
-
-    final JDegradee jdeg = new JDegradee();
-    jdeg.setPreferredSize(new Dimension(500, 100));
-
-    final JPanel panel = (JPanel) frame.getContentPane();
-
-    panel.setLayout(new BorderLayout());
-    panel.add(jdeg, BorderLayout.CENTER);
-
-    frame.setLocation(300, 300);
-    frame.setSize(new Dimension(500, 300));
-    frame.setVisible(true);
-    frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
   }
 }

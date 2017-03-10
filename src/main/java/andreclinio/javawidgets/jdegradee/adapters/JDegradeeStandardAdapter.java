@@ -47,7 +47,7 @@ public class JDegradeeStandardAdapter extends JDegradeeAdapter {
    * @param event Java event
    * @return valid index or -1.
    */
-  final protected static int getMarkIndexOnEvent(final JDegradee jDegradee, final MouseEvent event) {
+  protected static int getMarkIndexOnEvent(final JDegradee jDegradee, final MouseEvent event) {
     final int numItems = jDegradee.getNumItems();
     for (int idx = 0; idx < numItems; idx++) {
       if (jDegradee.hasMarkColor(idx)) {

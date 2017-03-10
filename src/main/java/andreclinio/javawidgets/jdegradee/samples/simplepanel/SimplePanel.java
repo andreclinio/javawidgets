@@ -75,26 +75,23 @@ public class SimplePanel {
    * @param args arguments
    */
   static public void main(final String[] args) {
-    SwingUtilities.invokeLater(new Runnable() {
-      @Override
-      public void run() {
-        final JFrame frame = new JFrame();
-        frame.setMinimumSize(new Dimension(300, 300));
+    SwingUtilities.invokeLater(() -> {
+      final JFrame frame = new JFrame();
+      frame.setMinimumSize(new Dimension(300, 300));
 
-        final JDegradeePanel jdeg = new JDegradeePanel();
-        final JPanel vhPanel = buildVHPanel(jdeg);
-        final JPanel txtPanel = buildTextPanel(jdeg);
+      final JDegradeePanel jdeg = new JDegradeePanel();
+      final JPanel vhPanel = buildVHPanel(jdeg);
+      final JPanel txtPanel = buildTextPanel(jdeg);
 
-        final JPanel panel = (JPanel) frame.getContentPane();
-        panel.setLayout(new BorderLayout());
-        panel.add(jdeg, BorderLayout.CENTER);
-        panel.add(vhPanel, BorderLayout.SOUTH);
-        panel.add(txtPanel, BorderLayout.NORTH);
+      final JPanel panel = (JPanel) frame.getContentPane();
+      panel.setLayout(new BorderLayout());
+      panel.add(jdeg, BorderLayout.CENTER);
+      panel.add(vhPanel, BorderLayout.SOUTH);
+      panel.add(txtPanel, BorderLayout.NORTH);
 
-        frame.setSize(new Dimension(600, 150));
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-      }
+      frame.setSize(new Dimension(600, 150));
+      frame.setVisible(true);
+      frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     });
   }
 }

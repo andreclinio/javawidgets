@@ -6,22 +6,21 @@ import java.awt.geom.Rectangle2D;
 import andreclinio.javawidgets.jdegradee.JDegradee;
 
 /**
- * Interface de definifição do objeto que define o objeto a ser desenhado dento
- * de um elmento de degradeé.
+ * Extension drawing interface.
  *
  * @author André Clinio
  */
 public interface JDegradeeRenderer {
 
   /**
-   * Consulta o texto a ser desenhado dentro de um elmento.
+   * Render anything else inside de element
    *
-   * @param jDegradee o widget
-   * @param g2d o graphics a ser utilizado.
-   * @param rect a área relativa ao item
-   * @param index o índice do elemento
+   * @param jDegradee widget
+   * @param g2d graphics for drawing
+   * @param rect drawing area
+   * @param index element index
    *
    */
-  public void render(final JDegradee jDegradee, final Graphics2D g2d, final Rectangle2D rect, final int index);
+   void render(final JDegradee jDegradee, final Graphics2D g2d, final Rectangle2D rect, final int index);
 
 }
