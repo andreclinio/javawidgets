@@ -14,21 +14,21 @@ import andreclinio.javawidgets.jdegradee.JDegradee;
 public class JDegradeeIndexRenderer implements JDegradeeRenderer {
 
   /**
-   * Fonte.
+   * Font
    */
-  final private Font font;
+  final private Font textFont;
 
   /**
-   * Cor selecionada
+   * Font color
    */
-  final private Color fontColor;
+  final private Color textColor;
 
   /**
-   * Desenho de uma string centrada dentro (não clipado) de um retângulo
+   * Drawing of a centered string (not clipped) inside a rectangle.
    *
-   * @param g2d o contexto gráfico Java
-   * @param text o texto
-   * @param box o retângulo
+   * @param g2d Java graphic context
+   * @param text text
+   * @param box retangle
    */
   private void drawStringInBox(final Graphics2D g2d, final String text, final Rectangle2D box) {
     final double x = box.getCenterX();
@@ -44,10 +44,10 @@ public class JDegradeeIndexRenderer implements JDegradeeRenderer {
   }
 
   /**
-   * Consulta a string formatada com o índice
+   * String builder, based on an index
    * 
-   * @param index o índice
-   * @return a string
+   * @param index index
+   * @return text
    */
   private String getText(final int index) {
     return "(" + (index + 1) + ")";
@@ -61,8 +61,8 @@ public class JDegradeeIndexRenderer implements JDegradeeRenderer {
     if (text == null) {
       return;
     }
-    g2d.setFont(font);
-    g2d.setColor(fontColor == null ? Color.black : fontColor);
+    g2d.setFont(textFont);
+    g2d.setColor(textColor == null ? Color.black : textColor);
     final Rectangle2D txtRect = new Rectangle2D.Double();
     switch (jDegradee.getOrientation()) {
       case HORIZONTAL: {
@@ -82,13 +82,13 @@ public class JDegradeeIndexRenderer implements JDegradeeRenderer {
   }
 
   /**
-   * Construtor padrão.
+   * Constructor
    * 
-   * @param font fonte
-   * @param fontColor cor da fonte
+   * @param font text font
+   * @param color text color
    */
-  public JDegradeeIndexRenderer(final Font font, final Color fontColor) {
-    this.fontColor = fontColor;
-    this.font = font;
+  public JDegradeeIndexRenderer(final Font font, final Color color) {
+    this.textColor = color;
+    this.textFont = font;
   }
 }
