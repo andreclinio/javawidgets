@@ -30,7 +30,7 @@ public class JDegradeeIndexRenderer implements JDegradeeRenderer {
    * @param text o texto
    * @param box o retângulo
    */
-  final private void drawStringInBox(final Graphics2D g2d, final String text, final Rectangle2D box) {
+  private void drawStringInBox(final Graphics2D g2d, final String text, final Rectangle2D box) {
     final double x = box.getCenterX();
     final double y = box.getCenterY();
     final FontMetrics fm = g2d.getFontMetrics();
@@ -49,7 +49,7 @@ public class JDegradeeIndexRenderer implements JDegradeeRenderer {
    * @param index o índice
    * @return a string
    */
-  final private String getText(final int index) {
+  private String getText(final int index) {
     return "(" + (index + 1) + ")";
   }
 

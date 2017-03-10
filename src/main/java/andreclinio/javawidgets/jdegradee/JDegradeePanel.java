@@ -2,8 +2,6 @@ package andreclinio.javawidgets.jdegradee;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
@@ -15,7 +13,7 @@ import andreclinio.javawidgets.jdegradee.renderers.JDegradeeRenderer;
 /**
  * Simple panel with de {@link JDegradee} with two limits buttons.
  *
- * @author André Clinio
+ * @author Andrï¿½ Clinio
  */
 public class JDegradeePanel extends JPanel {
 
@@ -41,23 +39,20 @@ public class JDegradeePanel extends JPanel {
    *
    * @return new color or <code>null</code> (for cancel operation)
    */
-  final private Color chooseColor(final Color color) {
+  private Color chooseColor(final Color color) {
     return JColorChooser.showDialog(jDegradee, "", color);
   }
 
   /**
    * Button layout
    */
-  final private void adjustPrimaryButton() {
+  private void adjustPrimaryButton() {
     final Color priColor = jDegradee.getPrimaryColor();
     priButton.setBackground(priColor);
-    priButton.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent ae) {
-        final Color color = chooseColor(priColor);
-        if (color != null) {
-          setPrimaryColor(color);
-        }
+    priButton.addActionListener(e -> {
+      final Color color = chooseColor(priColor);
+      if (color != null) {
+        setPrimaryColor(color);
       }
     });
   }
@@ -65,16 +60,13 @@ public class JDegradeePanel extends JPanel {
   /**
    * Button layout
    */
-  final private void adjustSecondaryButton() {
+  private void adjustSecondaryButton() {
     final Color secColor = jDegradee.getSecondaryColor();
     secButton.setBackground(secColor);
-    secButton.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent ae) {
-        final Color color = chooseColor(secColor);
-        if (color != null) {
-          setSecondaryColor(color);
-        }
+    secButton.addActionListener(ae -> {
+      final Color color = chooseColor(secColor);
+      if (color != null) {
+        setSecondaryColor(color);
       }
     });
   }
@@ -102,7 +94,7 @@ public class JDegradeePanel extends JPanel {
   /**
    * Adjustment of mouse adapter
    */
-  final private void setMouseAdapter() {
+  private void setMouseAdapter() {
     jDegradee.addDegradeeListener(new JDegradeeStandardAdapter("ED", "DEL"));
   }
 

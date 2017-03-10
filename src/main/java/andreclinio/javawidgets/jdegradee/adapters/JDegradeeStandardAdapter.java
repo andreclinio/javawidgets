@@ -12,46 +12,49 @@ import javax.swing.JPopupMenu;
 import andreclinio.javawidgets.jdegradee.JDegradee;
 
 /**
- * Tratador padrão de mouse.
+ * Default mouse adapter.
  *
- * @author André Clinio
+ * @author AndrÃ© Clinio
  */
 public class JDegradeeStandardAdapter extends JDegradeeAdapter {
 
   /**
-   * Texto da ação de editar marca
+   * Edition text
    */
   final private String editionString;
 
   /**
-   * Texto da ação de apagar marca
+   * Deletion text
    */
   final private String deletionString;
 
   /**
-   * Escolha de uma cor
+   * Color chooser
    *
-   * @param jDegradee o widget
-   * @param color a cor antiga já selecionada
+   * @param jDegradee widget
+   * @param color old selected color
    *
-   * @return uma cor (ou <code>null</code> em caso de desistência)
+   * @return new chosen color (or {@code null}
    */
-  final private static Color chooseColor(final JDegradee jDegradee, final Color color) {
+  private static Color chooseColor(final JDegradee jDegradee, final Color color) {
     return JColorChooser.showDialog(jDegradee, "", color);
   }
 
   /**
-   * Indica se existe uma marca em um evento de mouse.
+   * Checks if there is a mark at mouse event coordinates.
    *
-   * @param jDegradee o widget
-   * @param event evento Java
-   * @return o índice válido ou -1
+   * @param jDegradee widget
+   * @param event Java event
+   * @return valid index or -1.
    */
   final protected static int getMarkIndexOnEvent(final JDegradee jDegradee, final MouseEvent event) {
     final int numItems = jDegradee.getNumItems();
     for (int idx = 0; idx < numItems; idx++) {
       if (jDegradee.hasMarkColor(idx)) {
         final Rectangle2D rect = jDegradee.getMarkBounds(idx);
+        if (rect == null) {
+          return -1;
+        }
         final double x = event.getX();
         final double y = event.getY();
         if (rect.contains(x, y)) {
@@ -63,13 +66,13 @@ public class JDegradeeStandardAdapter extends JDegradeeAdapter {
   }
 
   /**
-   * Construção de um menu popup.
+   * Menu popup building
    *
-   * @param jDegradee o widget
-   * @param index o índice
-   * @return o menu
+   * @param jDegradee widget
+   * @param index index
+   * @return menu
    */
-  final private JPopupMenu buildMarkMenu(final JDegradee jDegradee, final int index) {
+  private JPopupMenu buildMarkMenu(final JDegradee jDegradee, final int index) {
     final JPopupMenu menu = new JPopupMenu();
 
     menu.add(new AbstractAction(deletionString) {
@@ -94,13 +97,13 @@ public class JDegradeeStandardAdapter extends JDegradeeAdapter {
   }
 
   /**
-   * Método interno para tantar acinonar o menu de marcas.
+   * Internal menu method to add marks.
    *
-   * @param jDegradee o widget
-   * @param event o evnto Java
-   * @param index o índice
+   * @param jDegradee widget
+   * @param index selected color index
+   * @param event original Java event
    */
-  final private void tryMarkMenu(final JDegradee jDegradee, final MouseEvent event, final int index) {
+  private void tryMarkMenu(final JDegradee jDegradee, final MouseEvent event, final int index) {
     if (event.getButton() != MouseEvent.BUTTON3) {
       return;
     }
@@ -114,12 +117,13 @@ public class JDegradeeStandardAdapter extends JDegradeeAdapter {
   }
 
   /**
-   * @param jDegradee o widget
-   * @param index
-   * @param color
-   * @param event
+   * Try to add mark.
+   * @param jDegradee widget
+   * @param index selected color index
+   * @param color selected color
+   * @param event original Java event
    */
-  final private void tryMarkCreation(final JDegradee jDegradee, final int index, final Color color,
+  private void tryMarkCreation(final JDegradee jDegradee, final int index, final Color color,
     final MouseEvent event) {
     if (getMarkIndexOnEvent(jDegradee, event) >= 0) {
       return;
@@ -173,10 +177,10 @@ public class JDegradeeStandardAdapter extends JDegradeeAdapter {
   }
 
   /**
-   * Construtor padrão.
+   * Constructor
    *
-   * @param editionString texto de edição
-   * @param deletionString texto de deleção
+   * @param editionString edition text
+   * @param deletionString deletion text
    */
   public JDegradeeStandardAdapter(final String editionString, final String deletionString) {
     this.deletionString = deletionString;

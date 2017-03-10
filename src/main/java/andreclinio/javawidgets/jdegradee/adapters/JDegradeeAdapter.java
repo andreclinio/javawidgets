@@ -7,91 +7,92 @@ import java.awt.event.MouseWheelEvent;
 import andreclinio.javawidgets.jdegradee.JDegradee;
 
 /**
- * Adaptador de eventos de mouse sobre o controle
+ * Mouse adapter for widgets
  *
- * @author André Clinio
+ * @author Andrï¿½ Clinio
  * @see JDegradee
  */
 public class JDegradeeAdapter {
 
   /**
-   * Evento de click do mouse
+   * Mouse click event
    * 
-   * @param jDegradee o widget
-   * @param index o índice da cor selecionada
-   * @param color a color selecionada
-   * @param event evento Java original
+   * @param jDegradee widget
+   * @param index selected color index
+   * @param color selected color
+   * @param event original Java event
    */
   public void mouseClicked(final JDegradee jDegradee, final int index, final Color color, final MouseEvent event) {
   }
 
   /**
-   * Evento de pressionamento de botão do mouse
+   * Mouse press event
    * 
-   * @param jDegradee o widget
-   * @param index o índice da cor selecionada
-   * @param color a color selecionada
-   * @param event evento Java original
+   * @param jDegradee widget
+   * @param index selected color index
+   * @param color selected color
+   * @param event original Java event
    */
   public void mousePressed(final JDegradee jDegradee, final int index, final Color color, final MouseEvent event) {
   }
 
   /**
-   * Evento de despressionamento de botão do mouse
+   * Mouse release event
    * 
-   * @param jDegradee o widget
-   * @param index o índice da cor selecionada
-   * @param color a color selecionada
-   * @param event evento Java original
+   * @param jDegradee widget
+   * @param index selected color index
+   * @param color selected color
+   * @param event original Java event
    */
   public void mouseReleased(final JDegradee jDegradee, final int index, final Color color, final MouseEvent event) {
   }
 
   /**
-   * Evento de entrada do mouse
+   * Mouse enter event
    * 
-   * @param jDegradee o widget
-   * @param event evento Java original
+   * @param jDegradee  widget
+   * @param event original Java event
+
    */
   public void mouseEntered(final JDegradee jDegradee, final MouseEvent event) {
   }
 
   /**
-   * Evento de saída do mouse
+   * Mouse exit event
    * 
-   * @param jDegradee o widget
-   * @param event o evento Java original
+   * @param jDegradee widget
+   * @param event original Java event
    */
   public void mouseExited(final JDegradee jDegradee, final MouseEvent event) {
   }
 
   /**
-   * Evento de mouse wheel
+   * Mouse wheel event
    * 
-   * @param jDegradee o widget
-   * @param event
+   * @param jDegradee  widget
+   * @param event event
    */
   public void mouseWheelMoved(final JDegradee jDegradee, final MouseWheelEvent event) {
   }
 
   /**
-   * Evento de arrasto do botão do mouse
+   * Mouse drag event
    * 
-   * @param jDegradee o widget
-   * @param index o índice da cor selecionada
-   * @param color a color selecionada
-   * @param event o evento Java original
+   * @param jDegradee widget
+   * @param index selected color index
+   * @param color selected color
+   * @param event original Java event
    */
   public void mouseDragged(final JDegradee jDegradee, final int index, final Color color, final MouseEvent event) {
   }
 
   /**
-   * Evento de movimentação do mouse
+   * Mouse move event
    * 
-   * @param jDegradee o widget
-   * @param index o índice da cor selecionada
-   * @param color a color selecionada
-   * @param event o evento Java original
+   * @param jDegradee widget
+   * @param index selected color index
+   * @param color selected color
+   * @param event original Java event
    */
   public void mouseMoved(final JDegradee jDegradee, final int index, final Color color, final MouseEvent event) {
   }
