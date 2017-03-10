@@ -5,38 +5,34 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 
-import javax.swing.ButtonGroup;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 import andreclinio.javawidgets.jdegradee.JDegradee;
 import andreclinio.javawidgets.jdegradee.JDegradeePanel;
 import andreclinio.javawidgets.jdegradee.renderers.JDegradeeIndexRenderer;
 
 /**
- * @author Andr� Clinio
+ * @author André Clinio
  */
 public class SimplePanel {
 
   /**
-   * Texto
+   * Text index renderer used in demo.
    */
   final static private JDegradeeIndexRenderer TB = new JDegradeeIndexRenderer(new Font("monospaced", Font.PLAIN, 12),
     Color.black);
 
   /**
-   * Constru��o de painel de toggles.
+   * Radio button panel construction
    *
-   * @param jdeg o degradee panel
-   * @return o painel
+   * @param jdeg  degradee panel
+   * @return panel
    */
   static private JPanel buildVHPanel(final JDegradeePanel jdeg) {
-    final JRadioButton vTog = new JRadioButton("V");
+    final JRadioButton vTog = new JRadioButton("Vertical");
     vTog.addActionListener(ae -> jdeg.setOrientation(JDegradee.Orientation.VERTICAL));
 
-    final JRadioButton hTog = new JRadioButton("H");
+    final JRadioButton hTog = new JRadioButton("Horizointal");
     hTog.addActionListener(ae -> jdeg.setOrientation(JDegradee.Orientation.HORIZONTAL));
 
     final ButtonGroup vhGrp = new ButtonGroup();
@@ -53,13 +49,13 @@ public class SimplePanel {
   }
 
   /**
-   * Constru��o de painel de toggles.
+   * Toggle panel construction
    *
-   * @param jdeg o degradee panel
-   * @return o painel
+   * @param jdeg  degradee panel
+   * @return  panel
    */
   static private JPanel buildTextPanel(final JDegradeePanel jdeg) {
-    final JRadioButton tog = new JRadioButton("Text");
+    final JRadioButton tog = new JRadioButton("Draw indexes");
     tog.addActionListener(ae -> {
       final boolean state = tog.isSelected();
       jdeg.clearItemRenderer();
@@ -74,28 +70,31 @@ public class SimplePanel {
   }
 
   /**
-   * M�todo de testes
+   * Main
    *
-   * @param args <i>n�o utilizado</i>
+   * @param args arguments
    */
   static public void main(final String[] args) {
-    final JFrame frame = new JFrame();
+    SwingUtilities.invokeLater(new Runnable() {
+      @Override
+      public void run() {
+        final JFrame frame = new JFrame();
+        frame.setMinimumSize(new Dimension(300, 300));
 
-    final JDegradeePanel jdeg = new JDegradeePanel();
-    jdeg.setPreferredSize(new Dimension(500, 100));
+        final JDegradeePanel jdeg = new JDegradeePanel();
+        final JPanel vhPanel = buildVHPanel(jdeg);
+        final JPanel txtPanel = buildTextPanel(jdeg);
 
-    final JPanel panel = (JPanel) frame.getContentPane();
-    final JPanel vhPanel = buildVHPanel(jdeg);
-    final JPanel txtPanel = buildTextPanel(jdeg);
+        final JPanel panel = (JPanel) frame.getContentPane();
+        panel.setLayout(new BorderLayout());
+        panel.add(jdeg, BorderLayout.CENTER);
+        panel.add(vhPanel, BorderLayout.SOUTH);
+        panel.add(txtPanel, BorderLayout.NORTH);
 
-    panel.setLayout(new BorderLayout());
-    panel.add(jdeg, BorderLayout.CENTER);
-    panel.add(vhPanel, BorderLayout.SOUTH);
-    panel.add(txtPanel, BorderLayout.NORTH);
-
-    frame.setLocation(300, 300);
-    frame.setSize(new Dimension(500, 300));
-    frame.setVisible(true);
-    frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        frame.setSize(new Dimension(600, 150));
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+      }
+    });
   }
 }

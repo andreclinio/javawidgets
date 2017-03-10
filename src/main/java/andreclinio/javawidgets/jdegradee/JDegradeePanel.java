@@ -13,7 +13,7 @@ import andreclinio.javawidgets.jdegradee.renderers.JDegradeeRenderer;
 /**
  * Simple panel with de {@link JDegradee} with two limits buttons.
  *
- * @author Andr� Clinio
+ * @author André Clinio
  */
 public class JDegradeePanel extends JPanel {
 
@@ -40,7 +40,7 @@ public class JDegradeePanel extends JPanel {
    * @return new color or <code>null</code> (for cancel operation)
    */
   private Color chooseColor(final Color color) {
-    return JColorChooser.showDialog(jDegradee, "", color);
+    return JColorChooser.showDialog(jDegradee, "Color", color);
   }
 
   /**
@@ -95,7 +95,7 @@ public class JDegradeePanel extends JPanel {
    * Adjustment of mouse adapter
    */
   private void setMouseAdapter() {
-    jDegradee.addDegradeeListener(new JDegradeeStandardAdapter("ED", "DEL"));
+    jDegradee.addDegradeeListener(new JDegradeeStandardAdapter("Edit color...", "Delete mark"));
   }
 
   /**
